@@ -9,13 +9,25 @@ export const getPlatforms = async (req, res) => {
   }
 };
 
-export const createPlatform = async (req,res) =>{
+export const createPlatform = async (req, res) => {
   try {
     const platform = await Platform.create(req.body);
     res.status(201).json(platform);
   } catch (error) {
     res.status(500).json({
-      message:error.message
-    })
+      message: error.message,
+    });
   }
-}
+};
+
+export const getPlatformById = async (req, res) => {
+  try {
+    const platform = await Platform.findById(req.params.id);
+    if (!platform) {
+      return res.status(404).json({ message: "Platform not found" });
+    }
+    res.status(200).json(platform);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
