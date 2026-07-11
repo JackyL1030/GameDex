@@ -1,19 +1,24 @@
 import mongoose from "mongoose";
 
-const platformSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
+const platformSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    manufacturer: {
+      type: String,
+      trim: true,
+    },
+    releaseYear: {
+      type: Number,
+    },
   },
-  manufacturer: {
-    type: String,
-    trim: true,
+  {
+    timestamps: true,
   },
-  releaseYear: {
-    type: Number,
-  },
-});
+);
 
-const Platform = mongoose.model("Platform", platformSchema)
+const Platform = mongoose.model("Platform", platformSchema);
 export default Platform;

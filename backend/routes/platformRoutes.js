@@ -1,7 +1,11 @@
 import express from "express";
-import { getPlatforms } from "../controllers/platformController.js";
+import {
+  createPlatform,
+  getPlatforms,
+} from "../controllers/platformController.js";
 
 const router = express.Router();
 
 router.get("/", getPlatforms);
-export default router; 
+router.post("/", createPlatform);
+export default router;

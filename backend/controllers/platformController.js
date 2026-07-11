@@ -8,3 +8,14 @@ export const getPlatforms = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const createPlatform = async (req,res) =>{
+  try {
+    const platform = await Platform.create(req.body);
+    res.status(201).json(platform);
+  } catch (error) {
+    res.status(500).json({
+      message:error.message
+    })
+  }
+}
