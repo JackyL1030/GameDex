@@ -1,6 +1,6 @@
-import moongoose from "moongoose";
+import mongoose from "mongoose";
 
-const platformSchema = new moongoose.Schema({
+const platformSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
