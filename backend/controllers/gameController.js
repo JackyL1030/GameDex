@@ -3,7 +3,18 @@ import Platform from "../models/Platform.js";
 
 export const getGames = async (req, res) => {
   try {
-    const games = await Game.find().populate("platform");
+    const filter = {};
+    if (req.query.genre) {
+      filter.genre = req.query.genre;
+    }
+    if (req.query.completed) {
+      filter.completed = req.query.completed;
+    }
+    let query = Game.find().populate("platform");
+    if (req.query.sort === "rating") {
+      query = query.sort({ rating: -1 });
+    }
+    const games = await query;
     res.status(200).json(games);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -38,7 +49,7 @@ export const getGameById = async (req, res) => {
 export const updateGame = async (req, res) => {
   try {
     const game = await Game.findByIdAndUpdate(req.params.id, req.body, {
-      returnDocument: 'after',
+      returnDocument: "after",
       runValidators: true,
     });
     if (!game) {
