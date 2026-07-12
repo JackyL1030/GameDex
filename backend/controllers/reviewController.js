@@ -50,7 +50,7 @@ export const updateReview = async (req, res) => {
   }
 };
 
-export const deletedReview = async (req, res) => {
+export const deleteReview = async (req, res) => {
   try {
     const review = await Review.findByIdAndDelete(req.params.id);
     if (!review) {

@@ -1,7 +1,7 @@
 import express from "express";
 import {
   createReview,
-  deletedReview,
+  deleteReview,
   getReviewById,
   getReviews,
   updateReview,
@@ -13,6 +13,6 @@ router.get("/", getReviews);
 router.get("/:id", getReviewById);
 router.post("/", createReview);
 router.patch("/:id", updateReview);
-router.delete("/:id", deletedReview);
+router.delete("/:id", deleteReview);
 
 export default router;
