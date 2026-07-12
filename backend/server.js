@@ -3,6 +3,7 @@ import "dotenv/config";
 import { connectDB } from "./config/db.js";
 
 import platformRoutes from "./routes/platformRoutes.js";
+import gameRoutes from "./routes/gameRoute.js"
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/platforms", platformRoutes);
+app.use("/api/games", gameRoutes);
 
 app.get("/about", (req, res) => {
   res.send("GameDex is a video game collection API");
