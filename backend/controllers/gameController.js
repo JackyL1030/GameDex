@@ -72,3 +72,18 @@ export const deleteGame = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getStatistics = async (req, res) => {
+  try {
+    const statistics = await Game.aggregate([
+      {
+        $count: "totalGames",
+      },
+    ]);
+    res.status(200).json(statistics);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
