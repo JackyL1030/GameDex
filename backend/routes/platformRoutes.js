@@ -1,6 +1,7 @@
 import express from "express";
 import {
   createPlatform,
+  deletePlatform,
   getPlatformById,
   getPlatforms,
   updatePlatform,
@@ -12,5 +13,6 @@ router.get("/", getPlatforms);
 router.get("/:id", getPlatformById)
 router.post("/", createPlatform);
 router.patch("/:id", updatePlatform)
+router.delete("/:id", deletePlatform)
 
 export default router;

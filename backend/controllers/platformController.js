@@ -32,21 +32,29 @@ export const getPlatformById = async (req, res) => {
   }
 };
 
-export const updatePlatform = async (req, res) =>{
+export const updatePlatform = async (req, res) => {
   try {
-    const platform = await Platform.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new:true,
-        runValidators:true
-      }
-    );
-    if(!platform){
-      return res.statuss(404).json({message:"Platform not found"})
+    const platform = await Platform.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!platform) {
+      return res.statuss(404).json({ message: "Platform not found" });
     }
     res.status(200).json(platform);
   } catch (error) {
-    res.status(500).json({message: error.message});
+    res.status(500).json({ message: error.message });
   }
-}
+};
+
+export const deletePlatform = async (req, res) => {
+  try {
+    const platform = await Platform.findByIdAndDelete(req.params.id);
+    if (!platform) {
+      return res.status(404).json({ message: "Platform not found" });
+    }
+    res.status(200).json({ message: "Platform deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
