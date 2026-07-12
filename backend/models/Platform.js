@@ -22,3 +22,5 @@ const platformSchema = new mongoose.Schema(
 
 const Platform = mongoose.model("Platform", platformSchema);
 export default Platform;
+
+platformSchema.index({ name: 1 });
