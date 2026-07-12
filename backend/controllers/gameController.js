@@ -1,4 +1,5 @@
 import Game from "../models/Game.js";
+import Platform from "../models/Platform.js";
 
 export const getGames = async (req, res) => {
   try {
@@ -8,3 +9,16 @@ export const getGames = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const createGame = async (req,res) => {
+    try {
+        const platform = await Platform.findById(req.body.platform);
+        if(!platform){
+            return res.status(404).json({message:"Platform not found"})
+        }
+        const game = await Game.create(req.body);
+        res.status(201).json(game);
+    } catch (error) {
+        res.status(500).json({message:error.message});
+    }
+}

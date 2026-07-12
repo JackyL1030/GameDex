@@ -39,7 +39,7 @@ export const updatePlatform = async (req, res) => {
       runValidators: true,
     });
     if (!platform) {
-      return res.statuss(404).json({ message: "Platform not found" });
+      return res.status(404).json({ message: "Platform not found" });
     }
     res.status(200).json(platform);
   } catch (error) {
