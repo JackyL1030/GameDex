@@ -8,9 +8,9 @@ export const getGames = async (req, res) => {
       filter.genre = req.query.genre;
     }
     if (req.query.completed) {
-      filter.completed = req.query.completed;
+      filter.completed = req.query.completed === "true";
     }
-    let query = Game.find().populate("platform");
+    let query = Game.find(filter).populate("platform");
     if (req.query.sort === "rating") {
       query = query.sort({ rating: -1 });
     }
@@ -91,7 +91,35 @@ export const getStatistics = async (req, res) => {
         },
       },
     ]);
-    res.status(200).json(statistics);
+    const highestRatedGame = await Game.aggregate([
+      {
+        $sort: {
+          rating: -1,
+        },
+      },
+      {
+        $limit: 1,
+      },
+    ]);
+    const mostCommonGenre = await Game.aggregate([
+      {
+        $group: {
+          _id: "$genre",
+          count: {
+            $count: {},
+          },
+        },
+      },
+      {
+        $sort: {
+          count: -1,
+        },
+      },
+      {
+        $limit: 1,
+      },
+    ]);
+    res.status(200).json({ statistics, highestRatedGame, mostCommonGenre });
   } catch (error) {
     res.status(500).json({
       message: error.message,

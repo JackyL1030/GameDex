@@ -48,9 +48,10 @@ const gameSchema = new mongoose.Schema(
   },
 );
 
-const Game = mongoose.model("Game", gameSchema);
-export default Game;
-
 gameSchema.index({ title: 1 });
 gameSchema.index({ genre: 1 });
 gameSchema.index({ rating: -1 });
+
+const Game = mongoose.model("Game", gameSchema);
+export default Game;
+
