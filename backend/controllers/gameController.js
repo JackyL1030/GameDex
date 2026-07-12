@@ -77,7 +77,18 @@ export const getStatistics = async (req, res) => {
   try {
     const statistics = await Game.aggregate([
       {
-        $count: "totalGames",
+        $group: {
+          _id: null,
+          totalGames: {
+            $count: {},
+          },
+          averageRating: {
+            $avg: "$rating",
+          },
+          totalHoursPlayed: {
+            $sum: "$hoursPlayed",
+          },
+        },
       },
     ]);
     res.status(200).json(statistics);
