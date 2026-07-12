@@ -35,7 +35,7 @@ export const getPlatformById = async (req, res) => {
 export const updatePlatform = async (req, res) => {
   try {
     const platform = await Platform.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!platform) {

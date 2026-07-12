@@ -38,7 +38,7 @@ export const getReviewById = async (req, res) => {
 export const updateReview = async (req, res) => {
   try {
     const review = await Review.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!review) {

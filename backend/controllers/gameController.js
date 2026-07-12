@@ -38,7 +38,7 @@ export const getGameById = async (req, res) => {
 export const updateGame = async (req, res) => {
   try {
     const game = await Game.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
+      returnDocument: 'after',
       runValidators: true,
     });
     if (!game) {
