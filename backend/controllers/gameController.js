@@ -3,7 +3,7 @@ import Platform from "../models/Platform.js";
 
 export const getGames = async (req, res) => {
   try {
-    const games = await Game.find();
+    const games = await Game.find().populate("platform");
     res.status(200).json(games);
   } catch (error) {
     res.status(500).json({ message: error.message });

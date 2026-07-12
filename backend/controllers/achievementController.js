@@ -3,7 +3,7 @@ import Game from "../models/Game.js";
 
 export const getAchievements = async (req, res) => {
   try {
-    const achievements = await Achievement.find();
+    const achievements = await Achievement.find().populate("game");
     res.status(200).json(achievements);
   } catch (error) {
     res.status(500).json({ message: error.message });
